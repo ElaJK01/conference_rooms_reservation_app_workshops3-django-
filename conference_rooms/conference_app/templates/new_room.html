@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}
+Dodawanie Sali
+{% endblock %}
+{% block content %}
+    {% if msg %}
+        {{msg}}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">Nazwa sali:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="capacity">Ilość osób:</label>
+        <input type="number" id="capacity" min="1" max="30" name="capacity" required>
+        <labe for="has_projector">Czy posiada projektor?</labe>
+        <input type="checkbox"  name="has_projector">
+        <input type="submit" value="Dodaj Salę">
+    </form>
+{% endblock %}

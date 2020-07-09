@@ -1,0 +1,10 @@
+.vscode
+.idea
+__pycache__
+*.pyc
+*.log
+config.ini
+venv
+env
+projekt-env
+
