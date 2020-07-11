@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block title %}
+Modyfikowanie danych sali
+{% endblock %}
+{% block content %}
+    {% if msg %}
+        {{msg}}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {% if room%}
+        <label for="name">Nazwa sali:</label>
+        <input type="text" id="name" name="name"value="{{room.name}}"required>
+        <label for="id">numer id sali</label>
+        <input value="{{room.pk}}" id="id" name="id">
+        <label for="capacity">Ilość osób:</label>
+        <input type="number" id="capacity" min="1" max="30" name="capacity" value="{{room.capacity}}"required>
+        <labe for="has_projector">Posiada projektor:</labe>
+        <input type="checkbox"  name="projector" value="{{room.has_projector}}">
+        <input type="submit" value="zmodyfikuj dane">
+        {%endif%}
+    </form>
+{% endblock %}

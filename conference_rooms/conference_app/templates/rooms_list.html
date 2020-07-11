@@ -1,8 +1,10 @@
 {% extends "base.html" %}{% block title %}
 Sale konferencyjne
 {% endblock %}{% block content %}
+    <h3>Dodaj nową salę:</h3>
     <a href="/room/new"><button>Nowa sala</button></a>
     <form method="GET">
+        <h3>Wyszukaj salę:</h3>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name">
         <label for="capacity">Minimalna pojemność:</label>
@@ -12,8 +14,13 @@ Sale konferencyjne
         <input type="submit" value="Szukaj">
     </form>
     <ul>
+        <h3>Lista sal:</h3>
         {% for r in rooms %}
-            <li>{{r.name}} - pojemność {{r.capacity}}. Ma projektor: {{ r.has_projector|yesno:"Tak,Nie" }}</li>
+            <li>{{r.name}}
+                <a href="room/modify/{{r.pk}}"><button>Modyfikuj</button></a>
+                <button>Usuń</button>
+                <div class="today">dzisiaj: {{status}}</div>
+                - pojemność {{r.capacity}}. Ma projektor: {{ r.has_projector|yesno:"Tak,Nie" }}</li>
         {% empty %}
             Brak sal pasujących do wyszukiwania.
         {% endfor %}

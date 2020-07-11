@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Conference rooms{% endblock %}</title>
 </head>
 <body>
-{% block content %}{% endblock %}<div>
-2020 Conference rooms. Design by...
+<div>Dzisiaj: {% now "jS F Y H:i" %}</div>
+<div> <h2>Sale konferencyjne</h2></div>
+{% block content %}{% endblock %}
+
+<div>
+2020 Conference rooms app. Design by EJK & c.o.
 </div>
 </body>
 </html>
