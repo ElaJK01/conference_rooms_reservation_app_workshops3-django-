@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}
+Szczegóły sali {{room.name}}
+{% endblock %}
+{% block content %}
+    {% if msg %}
+        {{msg}}
+    {% endif %}
+    <div>Pojemność sali: {{room.capacity}}</div>
+    <div>Czy sala ma projektor: {{room.has_projector}}</div>
+    <div>Dni kiedy sala jest zarezerwowana:</div>
+        {%for r in reservations%}
+        <li>{{r.date}}</li>
+        {%endfor%}
+<a href="/reservation/{{room.pk}}"><button>Zarezerwuj salę</button></a>
+
+{% endblock %}

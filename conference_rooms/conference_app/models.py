@@ -15,4 +15,7 @@ class Reservation(models.Model):
     class Meta:
         unique_together = ['room', 'date']
 
+    def __str__(self):
+        return self.date
+
 

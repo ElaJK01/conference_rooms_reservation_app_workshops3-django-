@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from conference_app.models import Room
-from datetime import datetime
+from conference_app.models import Room, Reservation
+from datetime import datetime, date
 from django.shortcuts import redirect
 # Create your views here.
 
@@ -65,6 +65,43 @@ class RoomModify(View):
             ctx = { 'room': room,
                     'msg': "Wypełnij wszystkie pola"}
             return render(request, "room_modify.html", ctx)
+
+class RoomDetails(View):
+    def get(self, request, id):
+        room = Room.objects.get(pk=id)
+        reservations = Reservation.objects.filter(room=room)
+        if room:
+            ctx = {'room': room,
+                   'reservations': reservations}
+            return render(request, 'room_details.html', ctx)
+        else:
+            ctx = {'msg': "Nie ma sali o podanym numerze!"}
+            return render(request, 'room_details.html', ctx)
+
+class RoomReservation(View):
+    def get(self, request, id):
+        room = Room.objects.get(pk=id)
+        reservations = Reservation.objects.filter(room=room)
+        ctx = {'room': room,
+               'reservations': reservations}
+        return render(request, "room-reservation.html", ctx)
+
+    def post(self, request,id):
+        reservation_date = request.POST.get('reserv-date')
+        reservation_date = datetime.strptime(reservation_date, '%Y-%m-%d').date()
+        comment = request.POST.get('comment')
+        room_id = request.POST.get('id')
+        today = date.today()
+        room_to_reserv = Room.objects.get(pk=room_id)
+        if reservation_date == today:
+            ctx = {'msg': "Sala jest dzisiaj zarezerwowana!"}
+            return render(request, 'room-reservation.html', ctx)
+        elif reservation_date < today:
+            ctx = {'msg': "Nieprawidłowa data!"}
+            return render(request, 'room-reservation.html', ctx)
+        else:
+            Reservation.objects.create(date=reservation_date, comment=comment, room=room_to_reserv)
+            return redirect('rooms_list')
 
 
 class TempView(View):

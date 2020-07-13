@@ -16,7 +16,7 @@ Sale konferencyjne
     <ul>
         <h3>Lista sal:</h3>
         {% for r in rooms %}
-            <li>{{r.name}}
+        <li><a href="room/{{r.pk}}">{{r.name}}</a>
                 <a href="room/modify/{{r.pk}}"><button>Modyfikuj</button></a>
                 <button>Usuń</button>
                 <div class="today">dzisiaj: {{status}}</div>
