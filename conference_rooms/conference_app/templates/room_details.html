@@ -9,7 +9,9 @@ Szczegóły sali {{room.name}}
     <div>Czy sala ma projektor: {{room.has_projector}}</div>
     <div>Dni kiedy sala jest zarezerwowana:</div>
         {%for r in reservations%}
-        <li>{{r.date}}</li>
+            {%if r.date >= today%}
+        <li>{{r.date|date:"d-m-Y"}}</li>
+            {%endif%}
         {%endfor%}
 <a href="/reservation/{{room.pk}}"><button>Zarezerwuj salę</button></a>
 

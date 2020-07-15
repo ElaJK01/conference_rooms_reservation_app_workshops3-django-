@@ -18,9 +18,9 @@ Sale konferencyjne
         {% for r in rooms %}
         <li><a href="room/{{r.pk}}">{{r.name}}</a>
                 <a href="room/modify/{{r.pk}}"><button>Modyfikuj</button></a>
-                <button>Usuń</button>
-                <div class="today">dzisiaj: {{status}}</div>
-                - pojemność {{r.capacity}}. Ma projektor: {{ r.has_projector|yesno:"Tak,Nie" }}</li>
+                <a href="room/delete/{{r.pk}}"><button>Usuń</button></a>
+                <div class="today">dzisiaj: {{status}} </div>
+               - pojemność {{r.capacity}}. Ma projektor: {{ r.has_projector|yesno:"Tak,Nie" }}</li>
         {% empty %}
             Brak sal pasujących do wyszukiwania.
         {% endfor %}
