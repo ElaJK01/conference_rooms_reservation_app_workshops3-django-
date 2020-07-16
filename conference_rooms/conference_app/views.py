@@ -31,6 +31,7 @@ class RoomsList(View):
     def get(self, request):
         name = request.GET.get('name')
         min_capacity = request.GET.get('min_capacity')
+        choosen_date = request.GET.get('choosen_date')
         has_projector = 'has_projector' in request.GET
         rooms = Room.objects.all()
         reservation = Reservation.objects.all()
@@ -38,6 +39,8 @@ class RoomsList(View):
             rooms = rooms.filter(name__icontains=name)
         if min_capacity:
             rooms = rooms.filter(capacity__gte=min_capacity)
+        if choosen_date:
+            rooms = rooms.all().exclude(reservation__date = choosen_date)
         if has_projector:
             rooms = rooms.filter(has_projector=True)
         today = date.today()
